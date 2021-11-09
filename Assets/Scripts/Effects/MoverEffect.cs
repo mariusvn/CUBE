@@ -16,7 +16,7 @@ public class MoverEffect : MonoBehaviour
             {
                 other.gameObject.GetComponent<CharacterController>().Move(destination);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Debug.LogError("Target player game object doesn't have any CharacterController");
             }

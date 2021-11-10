@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class tmpPlayer : MonoBehaviour
 {
+    public bool disableMovements = false;
+    
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -18,6 +18,8 @@ public class tmpPlayer : MonoBehaviour
 
     void Update()
     {
+        if (disableMovements)
+            return;
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
-public class OrbitEffect : MonoBehaviour
+public class RotateEffect : MonoBehaviour
 {
     public string targetTag = "Player";
 

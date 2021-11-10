@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {x: 3, y: 1, z: 3}
   targetTag: Player
+  duration: 0.3
 --- !u!65 &381146393
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -213,7 +214,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d8352e2e34135be4fa5616db0e05cb40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -519,7 +520,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
@@ -527,7 +528,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 963194228}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 0
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 2
@@ -579,7 +580,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
@@ -826,13 +827,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1431953321}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 749092ab0d27cd747a6c5748210bdb95, type: 3}
+  m_Script: {fileID: 11500000, guid: ff40083554dbe044699b909c5576e0b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
-  rotation: 90
-  side: 1
-  animationTime: 0.6
 --- !u!1 &1459770972
 GameObject:
   m_ObjectHideFlags: 0

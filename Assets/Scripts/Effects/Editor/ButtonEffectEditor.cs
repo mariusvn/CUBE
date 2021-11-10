@@ -9,6 +9,7 @@ public class ButtonEffectEditor : Editor
         DrawDefaultInspector();
         ButtonEffect effect = (ButtonEffect)target;
         EditorGUILayout.LabelField("IsActive: ", effect.IsActive + "");
+        
     }
 
     public override bool RequiresConstantRepaint()

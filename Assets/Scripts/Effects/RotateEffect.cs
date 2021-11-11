@@ -37,9 +37,31 @@ public class RotateEffect : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        if (side == RotationSide.Clockwise)
+        {
+            GameObject pane;
+            try
+            {
+                pane = transform.Find("Arrows").gameObject;
+            }
+            catch (Exception)
+            {
+                Debug.LogWarning("No arrow child");
+                return;
+            }
+
+            Vector3 scale = pane.transform.localScale;
+            scale.x = -1 * scale.x;
+
+            pane.transform.localScale = scale;
+        }
+    }
+
     private IEnumerator RotateGameObject(float angleDegrees, float duration, GameObject target)
     {
-        //Rigidbody ctrlr = target.gameObject.GetComponent<Rigidbody>();
+        Rigidbody ctrlr = target.gameObject.GetComponent<Rigidbody>();
         //TODO change
         var player = target.gameObject.GetComponent<CharacterControl>();
         float movementSpeed = player.mvtSpeed;
@@ -57,10 +79,19 @@ public class RotateEffect : MonoBehaviour
         {
             step += Time.deltaTime * rate;
             var smoothStep = Mathf.SmoothStep(0.0f, 1.0f, step);
-            target.transform.RotateAround(transform.position, Vector3.up, angleDegrees * (smoothStep - lastStep));
+
+            Vector3 newPos = RotateAround(target.transform.position, transform.position, Vector3.up,
+                angleDegrees * (smoothStep - lastStep));
+            
+            ctrlr.MovePosition(newPos);
+            //ctrlr.MoveRotation(Quaternion.AngleAxis(angleDegrees * (smoothStep - lastStep), Vector3.up));
+            
+            //target.transform.RotateAround(transform.position, Vector3.up, angleDegrees * (smoothStep - lastStep));
             transform.Rotate(Vector3.up, angleDegrees * (smoothStep - lastStep));
+            target.transform.Rotate(Vector3.up, angleDegrees * (smoothStep - lastStep));
+            
             lastStep = smoothStep;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         
         #endregion
@@ -101,5 +132,9 @@ public class RotateEffect : MonoBehaviour
         ctrlr.enabled = true;
         player.disableMovements = false;
         */
+    }
+    
+    private Vector3 RotateAround(Vector3 position, Vector3 rotatePoint, Vector3 axis, float angle) {
+        return (Quaternion.AngleAxis(angle, axis) * (position - rotatePoint)) + rotatePoint;
     }
 }

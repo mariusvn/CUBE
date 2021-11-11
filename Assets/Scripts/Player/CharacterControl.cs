@@ -29,9 +29,6 @@ public class CharacterControl : MonoBehaviour
         if (IsGrounded())
         {
             var direction = Vector3.zero;
-            RaycastHit hit;
-
-            _velocity = Vector3.zero;
 
             if (Input.GetKey(_lastKey))
             {
@@ -57,21 +54,11 @@ public class CharacterControl : MonoBehaviour
                 else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
                     direction = Vector3.right;
             }
-
-
-            Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 2.0f, gdCheckMask);
-
-            _rb.position += Vector3.up * (hit.point.y - _rb.position.y);
+            _rb.velocity = direction * mvtSpeed;
             if (direction != Vector3.zero)
             {
-                _rb.position += direction * mvtSpeed * Time.deltaTime;
                 _rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
             }
-        }
-        else
-        {
-            _velocity += new Vector3(0.0f, 0.5f * _rb.mass * gravity * Time.deltaTime, 0.0f);
-            _rb.position += _velocity * Time.deltaTime;
         }
     }
 

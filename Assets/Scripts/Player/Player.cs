@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        _rb.velocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+        _rb.isKinematic = true;
         _rb.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
         _rb.position = _spawnPoint.position;
         if (deadBody != null)
@@ -46,6 +49,7 @@ public class Player : MonoBehaviour
         }
         ++playerId;
         SetIDText();
+        _rb.isKinematic = false;
     }
 
     public void TrySuicide(float startTime)

@@ -25,6 +25,8 @@ public class RotateEffect : MonoBehaviour
 
     public RotationSide side = RotationSide.Clockwise;
 
+    public bool switchSideEveryUse = false;
+
     [Min(0f)]
     public float animationTime = 0.6f;
     private void OnTriggerEnter(Collider other)
@@ -91,6 +93,10 @@ public class RotateEffect : MonoBehaviour
         
         
         player.mvtSpeed = movementSpeed;
+        if (switchSideEveryUse)
+        {
+            side = (RotationSide) (-1 * ((int)side));
+        }
         /*
         ctrlr.enabled = true;
         player.disableMovements = false;

@@ -24,7 +24,12 @@ public class OrbitEffect : MonoBehaviour
 
     [Range(0f, 360f)]
     public float anglePerSecond = 45f;
-    
+
+    private void Awake()
+    {
+        DrawRadius(radiusToStop);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         StartCoroutine(ExecuteOrbit(other.transform.parent.gameObject));
@@ -38,6 +43,7 @@ public class OrbitEffect : MonoBehaviour
 
         body.useGravity = false;
         ctrlr.gravity = 0;
+        ctrlr.forceEnableControlls = true;
         
         float dist = Vector3.Distance(transform.position, target.transform.position);
         
@@ -51,7 +57,6 @@ public class OrbitEffect : MonoBehaviour
                 selfPosition, 
                 vectorAxises[(int)axis],
                 anglePerSecond * Time.deltaTime);
-            //Vector3 diff = targetPosition - newPos;
             
             body.MovePosition(newPos);
             
@@ -62,12 +67,47 @@ public class OrbitEffect : MonoBehaviour
 
         ctrlr.gravity = gravity;
         body.useGravity = true;
+        ctrlr.forceEnableControlls = false;
     }
     
     private Vector3 RotateAbout(Vector3 position, Vector3 rotatePoint, Vector3 axis, float angle) {
         return (Quaternion.AngleAxis(angle, axis) * (position - rotatePoint)) + rotatePoint;
     }
 
+    private void DrawRadius(float radius)
+    {
+        const int vertexCount = 50;
+        
+        LineRenderer lineRenderer = gameObject.GetComponent<LineRenderer>();
+        lineRenderer.positionCount = vertexCount + 1;
+        
+        Vector3 turnAxis;
+        
+        switch (axis)
+        {
+            case AxisEnum.X:
+                turnAxis = Vector3.forward;
+                break;
+            case AxisEnum.Y:
+                turnAxis = Vector3.right;
+                break;
+            default: // z
+                turnAxis = Vector3.up;
+                break;
+        }
+        
+        
+        for (int i = 0; i < vertexCount + 1; i++)
+        {
+            Vector3 pos = RotateAbout(
+                transform.position + (turnAxis * radius),
+                transform.position, 
+                vectorAxises[(int)axis],
+                (360f / vertexCount) * i);
+            lineRenderer.SetPosition(i, pos);
+            
+        }
+    }
 
 #if UNITY_EDITOR
 

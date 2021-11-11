@@ -39,10 +39,10 @@ public class Laser : MonoBehaviour
 		    {
 			    if(Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength))
 			    {
-                    if (hit.transform.tag == targetTag) {
-                        // On détruit le joueur (ou l'entité cible) ici
-                        Destroy(hit.transform.gameObject);
-                    }
+                    // if (hit.transform.tag == targetTag)
+					// {
+                    //     hit.transform.gameObject.Player.Die();
+                    // }
 				    lineRenderer.positionCount += 1;
 				    lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
 				    remainingLength -= Vector3.Distance(ray.origin, hit.point);

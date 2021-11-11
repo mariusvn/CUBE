@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Mirror
   - DeathZone
+  - PushingUpgrade
+  - Cube
+  - Player Heart
+  - Constraint
   layers:
   - Default
   - TransparentFX

@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private Rigidbody _rb;
     private bool _suicided = false;
     private Vector3 _heartOrigin;
+    private Renderer _heartRenderer;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,6 +25,13 @@ public class Player : MonoBehaviour
         else if (other.CompareTag("DeathZone"))
         {
             Die();
+        }
+        else if (other.CompareTag("PushingUpgrade"))
+        {
+            UpgradesController.pushUpgrade = true;
+            Destroy(other.gameObject.transform.parent.gameObject);
+            _heartRenderer.material.SetColor("_EMISSION_COLOR", new Color(130f,0f,186f,0f));
+            applyUpgrades();
         }
     }
 
@@ -69,11 +77,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void applyUpgrades()
+    {
+        if (UpgradesController.pushUpgrade == true)
+        {
+            foreach (GameObject cube in GameObject.FindGameObjectsWithTag("Cube")) cube.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _heartRenderer = GameObject.FindGameObjectWithTag("Player Heart").GetComponent<Renderer>();
         SetIDText();
+        applyUpgrades();
     }
 
     // Update is called once per frame

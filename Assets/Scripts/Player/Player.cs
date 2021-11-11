@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public GameObject heart;
     public GameObject deadBody;
 
-    private Transform _spawnPoint;
+    private SpawnPoint _spawnPoint;
     private Rigidbody _rb;
     private bool _suicided = false;
     private Vector3 _heartOrigin;
@@ -20,7 +20,16 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Respawn"))
         {
-            _spawnPoint = other.gameObject.transform;
+            if (_spawnPoint)
+            {
+                _spawnPoint.UnSetSpawnPoint();
+            }
+
+            other.gameObject.TryGetComponent<SpawnPoint>(out _spawnPoint);
+            if (_spawnPoint)
+            {
+                _spawnPoint.SetSpawnPoint();
+            }
         }
         else if (other.CompareTag("DeathZone"))
         {
@@ -30,7 +39,7 @@ public class Player : MonoBehaviour
         {
             UpgradesController.pushUpgrade = true;
             Destroy(other.gameObject.transform.parent.gameObject);
-            _heartRenderer.material.SetColor("_EMISSION_COLOR", new Color(130f,0f,186f,0f));
+            _heartRenderer.material.SetColor("_EMISSION_COLOR", new Color(130f, 0f, 186f, 0f));
             applyUpgrades();
         }
     }
@@ -40,8 +49,8 @@ public class Player : MonoBehaviour
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
         _rb.isKinematic = true;
-        _rb.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
-        _rb.position = _spawnPoint.position;
+        _rb.rotation = Quaternion.LookRotation(_spawnPoint.transform.forward, Vector3.up);
+        _rb.position = _spawnPoint.SpawnAt;
         if (deadBody != null)
         {
             var obj = Instantiate<GameObject>(deadBody.gameObject, new Vector3(0.0f, 10.0f, 0.0f), Random.rotation);
@@ -64,7 +73,9 @@ public class Player : MonoBehaviour
             }
         }
         else
+        {
             heart.transform.localPosition = _heartOrigin;
+        }
     }
 
     public void StopSuicide()
@@ -85,7 +96,10 @@ public class Player : MonoBehaviour
     {
         if (UpgradesController.pushUpgrade == true)
         {
-            foreach (GameObject cube in GameObject.FindGameObjectsWithTag("Cube")) cube.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            foreach (GameObject cube in GameObject.FindGameObjectsWithTag("Cube"))
+            {
+                cube.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            }
         }
     }
 

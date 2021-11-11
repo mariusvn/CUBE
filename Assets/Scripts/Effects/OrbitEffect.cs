@@ -27,12 +27,18 @@ public class OrbitEffect : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(ExecuteOrbit(other.gameObject));
+        StartCoroutine(ExecuteOrbit(other.transform.parent.gameObject));
     }
 
     private IEnumerator ExecuteOrbit(GameObject target)
     {
-        CharacterController ctrlr = target.GetComponent<CharacterController>();
+        CharacterControl ctrlr = target.GetComponent<CharacterControl>();
+        Rigidbody body = target.GetComponent<Rigidbody>();
+        float gravity = ctrlr.gravity;
+
+        body.useGravity = false;
+        ctrlr.gravity = 0;
+        
         float dist = Vector3.Distance(transform.position, target.transform.position);
         
         while (dist < radiusToStop)
@@ -45,14 +51,17 @@ public class OrbitEffect : MonoBehaviour
                 selfPosition, 
                 vectorAxises[(int)axis],
                 anglePerSecond * Time.deltaTime);
-            Vector3 diff = targetPosition - newPos;
+            //Vector3 diff = targetPosition - newPos;
             
-            ctrlr.Move(diff);
+            body.MovePosition(newPos);
             
             yield return null;
             
             dist = Vector3.Distance(selfPosition, targetPosition);
         }
+
+        ctrlr.gravity = gravity;
+        body.useGravity = true;
     }
     
     private Vector3 RotateAbout(Vector3 position, Vector3 rotatePoint, Vector3 axis, float angle) {

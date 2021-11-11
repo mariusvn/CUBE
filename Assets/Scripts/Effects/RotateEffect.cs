@@ -31,18 +31,19 @@ public class RotateEffect : MonoBehaviour
     {
         if (other.gameObject.CompareTag(targetTag))
         {
-            StartCoroutine(RotateGameObject(((float) rotation) * ((float) side), animationTime, other.gameObject));
+            StartCoroutine(RotateGameObject(((float) rotation) * ((float) side), animationTime, other.transform.parent.gameObject));
         }
     }
 
     private IEnumerator RotateGameObject(float angleDegrees, float duration, GameObject target)
     {
-        CharacterController ctrlr = target.gameObject.GetComponent<CharacterController>();
+        //Rigidbody ctrlr = target.gameObject.GetComponent<Rigidbody>();
         //TODO change
-        var player = target.gameObject.GetComponent<tmpPlayer>();
-        
-        player.disableMovements = true;
-        ctrlr.enabled = false;
+        var player = target.gameObject.GetComponent<CharacterControl>();
+        float movementSpeed = player.mvtSpeed;
+
+        player.mvtSpeed = 0f;
+        //ctrlr.enabled = false;
 
         #region Rotation
         
@@ -88,7 +89,11 @@ public class RotateEffect : MonoBehaviour
 
         #endregion
         
+        
+        player.mvtSpeed = movementSpeed;
+        /*
         ctrlr.enabled = true;
         player.disableMovements = false;
+        */
     }
 }

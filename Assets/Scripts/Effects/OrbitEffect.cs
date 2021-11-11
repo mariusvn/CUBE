@@ -40,16 +40,18 @@ public class OrbitEffect : MonoBehaviour
         CharacterControl ctrlr = target.GetComponent<CharacterControl>();
         Rigidbody body = target.GetComponent<Rigidbody>();
         float gravity = ctrlr.gravity;
+        RigidbodyInterpolation interpolation = body.interpolation;
 
         body.useGravity = false;
         ctrlr.gravity = 0;
         ctrlr.forceEnableControlls = true;
+        body.interpolation = RigidbodyInterpolation.None;
         
         float dist = Vector3.Distance(transform.position, target.transform.position);
         
         while (dist < radiusToStop)
         {
-            var targetPosition = target.transform.position;
+            var targetPosition = body.transform.position;
             var selfPosition = transform.position;
 
             Vector3 newPos = RotateAbout(
@@ -60,7 +62,7 @@ public class OrbitEffect : MonoBehaviour
             
             body.MovePosition(newPos);
             
-            yield return null;
+            yield return new WaitForFixedUpdate();
             
             dist = Vector3.Distance(selfPosition, targetPosition);
         }
@@ -68,6 +70,7 @@ public class OrbitEffect : MonoBehaviour
         ctrlr.gravity = gravity;
         body.useGravity = true;
         ctrlr.forceEnableControlls = false;
+        body.interpolation = interpolation;
     }
     
     private Vector3 RotateAbout(Vector3 position, Vector3 rotatePoint, Vector3 axis, float angle) {

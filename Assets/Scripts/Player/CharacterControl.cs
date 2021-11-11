@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody), typeof(Player))]
 public class CharacterControl : MonoBehaviour
 {
+    public bool forceEnableControlls = false;
     public float mvtSpeed = 1.0f;
     public float gravity = -9.81f;
     public Vector3 gdCheckSize = Vector3.zero;
@@ -26,7 +27,7 @@ public class CharacterControl : MonoBehaviour
 
     void Move()
     {
-        if (IsGrounded())
+        if (forceEnableControlls || IsGrounded())
         {
             var direction = Vector3.zero;
 

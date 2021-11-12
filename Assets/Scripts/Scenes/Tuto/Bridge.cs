@@ -10,6 +10,7 @@ public class Bridge : MonoBehaviour
     private bool _isOpen = false;
     private bool _finished = false;
 
+    public bool HasFinished {get => _finished;}
     private IEnumerator OpenBridge()
     {
         var start = Time.time;
@@ -36,7 +37,7 @@ public class Bridge : MonoBehaviour
     private IEnumerator CloseBridge()
     {
         var start = Time.time;
-        var span = 0.2f;
+        var span = 0.4f;
         if (_isOpen)
         {
             while (Time.time - start < span)
@@ -44,7 +45,7 @@ public class Bridge : MonoBehaviour
                 for (int i = 0; i < _pans.Length; ++i)
                 {
                     var rot = _pans[i].transform.rotation.eulerAngles;
-                    _pans[i].transform.rotation = Quaternion.Euler(rot.x, rot.y, 90.0f - 90.0f * (Time.time - start) / span);
+                    _pans[i].transform.rotation = Quaternion.Euler(rot.x, rot.y, -90.0f + 90.0f * (Time.time - start) / span);
                 }
                 yield return null;
             }

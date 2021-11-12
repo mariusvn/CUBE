@@ -14,7 +14,6 @@ public class Door : MonoBehaviour
 
     virtual protected IEnumerator OpenDoor()
     {
-        print("Start Coroutine");
         door.SetActive(false);
         inUse = false;
         isOpen = true;
@@ -23,7 +22,6 @@ public class Door : MonoBehaviour
 
     virtual protected IEnumerator CloseDoor()
     {
-        print("Start Coroutine");
         door.SetActive(true);
         inUse = false;
         isOpen = false;

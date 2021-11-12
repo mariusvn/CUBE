@@ -11,7 +11,6 @@ public class CharacterControl : MonoBehaviour
 
     private Rigidbody _rb;
     private Player _player;
-    private Vector3 _velocity = Vector3.zero;
     private float _startSuicide = 0.0f;
     private KeyCode _lastKey = KeyCode.None;
 
@@ -59,21 +58,27 @@ public class CharacterControl : MonoBehaviour
             if (direction != Vector3.zero)
             {
                 _rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
+                RaycastHit hit;
+                Physics.Raycast(_rb.position + new Vector3(0, 1, 0.6f), Vector3.down, out hit, 1.0f, gdCheckMask);
+                if (hit.distance < 1.0f)
+                {
+                    _rb.velocity += new Vector3(0, 0.1f, 0);
+                }
             }
         }
     }
 
     void Suicide()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             _startSuicide = Time.time;
         }
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        if (Input.GetKey(KeyCode.Space))
         {
             _player.TrySuicide(_startSuicide);
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             _player.StopSuicide();
         }

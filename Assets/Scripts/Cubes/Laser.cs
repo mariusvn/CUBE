@@ -11,7 +11,6 @@ public class Laser : MonoBehaviour
     public bool activated;
 
 	private LineRenderer lineRenderer;
-    private LineRenderer lineRendererReset;
     private Renderer renderer;
 	private Ray ray;
 	private RaycastHit hit;
@@ -20,7 +19,6 @@ public class Laser : MonoBehaviour
 	private void Awake()
 	{
 		lineRenderer = GetComponent<LineRenderer>();
-        lineRendererReset = lineRenderer;
         renderer = GetComponent<Renderer>();
         if (activated)
             Activate();
@@ -39,10 +37,10 @@ public class Laser : MonoBehaviour
 		    {
 			    if(Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength))
 			    {
-                    // if (hit.transform.tag == targetTag)
-					// {
-                    //     hit.transform.gameObject.Player.Die();
-                    // }
+                    if (hit.transform.tag == targetTag)
+					{
+                    	hit.transform.gameObject.GetComponent<Player>().Die();
+                    }
 				    lineRenderer.positionCount += 1;
 				    lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
 				    remainingLength -= Vector3.Distance(ray.origin, hit.point);
@@ -64,6 +62,7 @@ public class Laser : MonoBehaviour
         renderer.material.SetColor("_Color", new Color(200f,0f,0f,255f));
         renderer.material.SetColor("_EmissionColor", new Color(0f,0f,0f,0f));
         activated = true;
+		lineRenderer.enabled = lineRenderer.enabled;
     }
 
     public void Deactivate()
@@ -71,6 +70,6 @@ public class Laser : MonoBehaviour
         renderer.material.SetColor("_Color", new Color(79f,0f,0f,255f));
         renderer.material.SetColor("_EmissionColor", new Color(0f,0f,0f,0f));
         activated = false;
-        lineRenderer = lineRendererReset;
+        lineRenderer.enabled = !lineRenderer.enabled;
     }
 }

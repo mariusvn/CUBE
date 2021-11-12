@@ -6,6 +6,7 @@ public class CharacterControl : MonoBehaviour
     public bool forceEnableControlls = false;
     public float mvtSpeed = 1.0f;
     public float gravity = -9.81f;
+    public float stepHeight = 0.02f;
     public Vector3 gdCheckSize = Vector3.zero;
     public LayerMask gdCheckMask;
 
@@ -59,8 +60,8 @@ public class CharacterControl : MonoBehaviour
             {
                 _rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
                 RaycastHit hit;
-                Physics.Raycast(_rb.position + new Vector3(0, 1, 0.6f), Vector3.down, out hit, 1.0f, gdCheckMask);
-                if (hit.distance < 1.0f)
+                Physics.Raycast(_rb.position + new Vector3(0, stepHeight, 0.6f), Vector3.down, out hit, stepHeight, gdCheckMask);
+                if (hit.distance < stepHeight)
                 {
                     _rb.velocity += new Vector3(0, 0.1f, 0);
                 }

@@ -434,7 +434,6 @@ GameObject:
   - component: {fileID: 7158999328258528123}
   - component: {fileID: 3302866099997094645}
   - component: {fileID: 9035806036212218713}
-  - component: {fileID: 8059943188217064234}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -509,21 +508,10 @@ MonoBehaviour:
   textId: {fileID: 2571081479651845094}
   suicideDuration: 2
   heart: {fileID: 8188652712867597333}
-  deadBody: {fileID: 5943097880481048344, guid: 27dfac37960a2264b8823db0fd50c5f6, type: 3}
---- !u!136 &8059943188217064234
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5910312945195950085}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.1
-  m_Height: 1
-  m_Direction: 0
-  m_Center: {x: 0, y: 0.1, z: 0.5}
+  hideId: 0
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7316654771058582019
 GameObject:
   m_ObjectHideFlags: 0

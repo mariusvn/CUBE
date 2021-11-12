@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
@@ -8,8 +9,10 @@ public class Player : MonoBehaviour
     public TextMeshPro textId;
     public float suicideDuration = 2.0f;
     public GameObject heart;
-    public GameObject deadBody;
+    public bool hideId = false;
 
+    [SerializeField]
+    private UnityEvent<int> onDeath;
     private SpawnPoint _spawnPoint;
     private Rigidbody _rb;
     private bool _suicided = false;
@@ -40,22 +43,20 @@ public class Player : MonoBehaviour
             UpgradesController.pushUpgrade = true;
             Destroy(other.gameObject.transform.parent.gameObject);
             _heartRenderer.material.SetColor("_EMISSION_COLOR", new Color(130f, 0f, 186f, 0f));
-            applyUpgrades();
+            ApplyUpgrades();
         }
     }
 
     public void Die()
     {
+        onDeath.Invoke(playerId);
+        if (_spawnPoint == null)
+            return;
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
         _rb.isKinematic = true;
         _rb.rotation = Quaternion.LookRotation(_spawnPoint.transform.forward, Vector3.up);
         _rb.position = _spawnPoint.SpawnAt;
-        if (deadBody != null)
-        {
-            var obj = Instantiate<GameObject>(deadBody.gameObject, new Vector3(0.0f, 10.0f, 0.0f), Random.rotation);
-            obj.GetComponentInChildren<TextMeshPro>().text = playerId.ToString();
-        }
         ++playerId;
         SetIDText();
         _rb.isKinematic = false;
@@ -90,9 +91,10 @@ public class Player : MonoBehaviour
         {
             textId.text = playerId.ToString();
         }
+        textId.gameObject.SetActive(!hideId);
     }
 
-    public void applyUpgrades()
+    public void ApplyUpgrades()
     {
         if (UpgradesController.pushUpgrade == true)
         {
@@ -109,7 +111,7 @@ public class Player : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _heartRenderer = GameObject.FindGameObjectWithTag("Player Heart").GetComponent<Renderer>();
         SetIDText();
-        applyUpgrades();
+        ApplyUpgrades();
     }
 
     // Update is called once per frame

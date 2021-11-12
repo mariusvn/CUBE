@@ -434,6 +434,7 @@ GameObject:
   - component: {fileID: 7158999328258528123}
   - component: {fileID: 3302866099997094645}
   - component: {fileID: 9035806036212218713}
+  - component: {fileID: 8059943188217064234}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -485,6 +486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab6d702721b5014ebd9076cd323f603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  forceEnableControlls: 0
   mvtSpeed: 3
   gravity: -9.81
   gdCheckSize: {x: 0.5, y: 0.05, z: 0.5}
@@ -508,6 +510,20 @@ MonoBehaviour:
   suicideDuration: 2
   heart: {fileID: 8188652712867597333}
   deadBody: {fileID: 5943097880481048344, guid: 27dfac37960a2264b8823db0fd50c5f6, type: 3}
+--- !u!136 &8059943188217064234
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5910312945195950085}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.1
+  m_Height: 1
+  m_Direction: 0
+  m_Center: {x: 0, y: 0.1, z: 0.5}
 --- !u!1 &7316654771058582019
 GameObject:
   m_ObjectHideFlags: 0

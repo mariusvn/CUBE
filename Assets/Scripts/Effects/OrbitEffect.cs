@@ -19,7 +19,7 @@ public class OrbitEffect : MonoBehaviour
     public AxisEnum axis = AxisEnum.Y;
     
     [Min(1f)]
-    [Tooltip("Must be bigger than the Sphere collider")]
+    [Tooltip("Must be bigger of .7 than the Sphere collider")]
     public float radiusToStop = 3f;
 
     [Range(0f, 360f)]

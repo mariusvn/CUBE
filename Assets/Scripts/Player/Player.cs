@@ -98,11 +98,12 @@ public class Player : MonoBehaviour
     public void ApplyUpgrades()
     {
         if (UpgradesController.pushUpgrade == true)
-                    {
+        {
             foreach (GameObject cube in GameObject.FindGameObjectsWithTag("Cube"))
             {
                 cube.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             }
+            _heartRenderer.material.SetColor("_EMISSION_COLOR", new Color(130f, 0f, 186f, 0f));
         }
     }
 

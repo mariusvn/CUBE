@@ -22,7 +22,7 @@ public class OrbitEffect : MonoBehaviour
     [Tooltip("Must be bigger of .7 than the Sphere collider")]
     public float radiusToStop = 3f;
 
-    [Range(0f, 360f)]
+    [Range(-360f, 360f)]
     public float anglePerSecond = 45f;
 
     private void Awake()

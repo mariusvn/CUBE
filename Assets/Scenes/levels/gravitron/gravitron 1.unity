@@ -224,6 +224,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9035806036212218713, guid: de62ebf4a7c0bed4b98b84daa3b0fdc6, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035806036212218713, guid: de62ebf4a7c0bed4b98b84daa3b0fdc6, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035806036212218713, guid: de62ebf4a7c0bed4b98b84daa3b0fdc6, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2117886811}
+    - target: {fileID: 9035806036212218713, guid: de62ebf4a7c0bed4b98b84daa3b0fdc6, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035806036212218713, guid: de62ebf4a7c0bed4b98b84daa3b0fdc6, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: resetTriggers
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035806036212218713, guid: de62ebf4a7c0bed4b98b84daa3b0fdc6, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TriggerEvents, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035806036212218713, guid: de62ebf4a7c0bed4b98b84daa3b0fdc6, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de62ebf4a7c0bed4b98b84daa3b0fdc6, type: 3}
 --- !u!4 &185388174 stripped
@@ -298,7 +326,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh67194
+  m_Name: pb_Mesh34850
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1889,7 +1917,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1361644
+  m_Name: pb_Mesh34918
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4996,7 +5024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bb99c6a2e26b0428983791dc4312bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerOnce: 0
+  triggerOnce: 1
   switchLasers: []
   switchSpinners: []
   doors:

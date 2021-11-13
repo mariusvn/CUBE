@@ -92,4 +92,13 @@ public class TriggerEvents : MonoBehaviour
         // if (raisedObject2 && height2 != 0)
         //     raisedObject2.transform.position =  new Vector3(transform.position.x, height, transform.position.z);
     }
+
+    public void resetTriggers(int a)
+    {
+        trigger = 0;
+        foreach (GameObject door in doors) {
+            if (door.GetComponent<Door>().IsOpen)
+                door.GetComponent<Door>().UseDoor();
+        }
+    }
 }

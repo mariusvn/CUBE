@@ -22,7 +22,7 @@ public class OrbitEffect : MonoBehaviour
     [Tooltip("Must be bigger of .7 than the Sphere collider")]
     public float radiusToStop = 3f;
 
-    [Range(0f, 360f)]
+    [Range(-360f, 360f)]
     public float anglePerSecond = 45f;
 
     private void Awake()
@@ -41,11 +41,13 @@ public class OrbitEffect : MonoBehaviour
         Rigidbody body = target.GetComponent<Rigidbody>();
         float gravity = ctrlr.gravity;
         RigidbodyInterpolation interpolation = body.interpolation;
+        RigidbodyConstraints constraints = body.constraints;
 
         body.useGravity = false;
         ctrlr.gravity = 0;
         ctrlr.forceEnableControlls = true;
         body.interpolation = RigidbodyInterpolation.None;
+        body.constraints = RigidbodyConstraints.FreezeRotation;
         
         float dist = Vector3.Distance(transform.position, target.transform.position);
         
@@ -71,6 +73,7 @@ public class OrbitEffect : MonoBehaviour
         body.useGravity = true;
         ctrlr.forceEnableControlls = false;
         body.interpolation = interpolation;
+        body.constraints = constraints;
     }
     
     private Vector3 RotateAbout(Vector3 position, Vector3 rotatePoint, Vector3 axis, float angle) {

@@ -488,6 +488,7 @@ MonoBehaviour:
   forceEnableControlls: 0
   mvtSpeed: 3
   gravity: -9.81
+  stepHeight: 0.02
   gdCheckSize: {x: 0.5, y: 0.05, z: 0.5}
   gdCheckMask:
     serializedVersion: 2

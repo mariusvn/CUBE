@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class Tuto : MonoBehaviour
 {
+    public GameObject player;
     public GameObject deadBody;
+    public Door lvlEnd;
+    public Bridge bridge;
+
     public void OnPlayerDeath(int count)
     {
         if (deadBody != null)
@@ -19,12 +21,12 @@ public class Tuto : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        lvlEnd.UseDoor();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

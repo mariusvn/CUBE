@@ -5,8 +5,6 @@ public class Bridge : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] _pans;
-    [SerializeField]
-    private Renderer _sidePanel;
     private bool _isOpen = false;
     private bool _finished = false;
 
@@ -38,7 +36,7 @@ public class Bridge : MonoBehaviour
     {
         var start = Time.time;
         var span = 0.4f;
-        if (_isOpen)
+        if (_isOpen && !_finished)
         {
             while (Time.time - start < span)
             {

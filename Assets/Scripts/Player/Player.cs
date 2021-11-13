@@ -5,19 +5,20 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
-    public int playerId;
     public TextMeshPro textId;
     public float suicideDuration = 2.0f;
     public GameObject heart;
     public bool hideId = false;
+    public UnityEvent<int> onDeath;
 
-    [SerializeField]
-    private UnityEvent<int> onDeath;
+    static int deathCount = 0;
     private SpawnPoint _spawnPoint;
     private Rigidbody _rb;
     private bool _suicided = false;
     private Vector3 _heartOrigin;
     private Renderer _heartRenderer;
+
+    public int DeathCount {get => deathCount;}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -49,19 +50,19 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        onDeath.Invoke(playerId);
+        onDeath.Invoke(deathCount);
         if (_spawnPoint == null)
             return;
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
         _rb.isKinematic = true;
-        _rb.rotation = Quaternion.LookRotation(_spawnPoint.transform.forward, Vector3.up);
         _rb.position = _spawnPoint.SpawnAt;
-        ++playerId;
+        ++deathCount;
         SetIDText();
         _rb.isKinematic = false;
+        _rb.rotation = Quaternion.LookRotation(_spawnPoint.transform.forward, Vector3.up);
     }
-
+        
     public void TrySuicide(float startTime)
     {
         if (_suicided == false)
@@ -85,11 +86,11 @@ public class Player : MonoBehaviour
         _suicided = false;
     }
 
-    void SetIDText()
+    public void SetIDText()
     {
         if (textId)
         {
-            textId.text = playerId.ToString();
+            textId.text = deathCount.ToString();
         }
         textId.gameObject.SetActive(!hideId);
     }
@@ -97,7 +98,7 @@ public class Player : MonoBehaviour
     public void ApplyUpgrades()
     {
         if (UpgradesController.pushUpgrade == true)
-        {
+                    {
             foreach (GameObject cube in GameObject.FindGameObjectsWithTag("Cube"))
             {
                 cube.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;

@@ -3319,7 +3319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229e37f6dee1a90439988f1f7ff2a434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneId: -1
+  sceneId: 4
   onTrigger:
     m_PersistentCalls:
       m_Calls: []

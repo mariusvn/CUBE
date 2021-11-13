@@ -9,9 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/levels/TutoScene.unity
     guid: d91980d987739754bb7b7aa04af0bb0a
   - enabled: 1
-    path: Assets/Scenes/levels/lasers/Lasers 2.unity
-    guid: 67dbf237a1e9b6e4c973ac5a101581ae
+    path: Assets/Scenes/levels/gravitron/gravitron 1.unity
+    guid: aa08cc49a258fdd46b436072483e4edb
+  - enabled: 1
+    path: Assets/Scenes/levels/lasers/Lasers 1.unity
+    guid: 88173dca95072e744856b41dbcec81bb
   - enabled: 1
     path: Assets/Scenes/levels/gravitron/gravitron 2.unity
     guid: f0b7785e3a0ea5149abc616a4fdcac3d
+  - enabled: 1
+    path: Assets/Scenes/levels/lasers/Lasers 2.unity
+    guid: 67dbf237a1e9b6e4c973ac5a101581ae
   m_configObjects: {}

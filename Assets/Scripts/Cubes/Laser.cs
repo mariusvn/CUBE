@@ -62,7 +62,7 @@ public class Laser : MonoBehaviour
         renderer.material.SetColor("_Color", new Color(200f,0f,0f,255f));
         renderer.material.SetColor("_EmissionColor", new Color(0f,0f,0f,0f));
         activated = true;
-		lineRenderer.enabled = lineRenderer.enabled;
+		lineRenderer.enabled = true;
     }
 
     public void Deactivate()
@@ -70,6 +70,6 @@ public class Laser : MonoBehaviour
         renderer.material.SetColor("_Color", new Color(79f,0f,0f,255f));
         renderer.material.SetColor("_EmissionColor", new Color(0f,0f,0f,0f));
         activated = false;
-        lineRenderer.enabled = !lineRenderer.enabled;
+        lineRenderer.enabled = false;
     }
 }

@@ -12,8 +12,12 @@ public class TriggerEvents : MonoBehaviour
     public List<GameObject> switchSpinners;
     [Header("Les portes à ouvrir")]
     public List<GameObject> doors;
-    // [Header("Les lasers à switch on/off")]
-    // public List<GameObject> switchLasers
+    [Header("L'objet à monté")]
+    public GameObject raisedObject;
+    public float height = 0;
+    // public GameObject raisedObject2;
+    // public float height2 = 0;
+    //public float rasingSpeed = 1;
 
 
     private int trigger = 0;
@@ -34,7 +38,17 @@ public class TriggerEvents : MonoBehaviour
                 SwitchLasers();
                 SwitchSpinners();
                 OpenDoors();
+                RaiseDeathZone();
+            } else if (!triggerOnce && trigger == 0) {
+                trigger = 1;
+                SwitchLasers();
+                SwitchSpinners();
+                OpenDoors();
             }
+        }
+        else {
+            if (!triggerOnce && trigger == 1)
+                trigger = 0;
         }
     }
 
@@ -69,5 +83,13 @@ public class TriggerEvents : MonoBehaviour
                 door.GetComponent<Door>().UseDoor();
             }
         }
+    }
+
+    void RaiseDeathZone()
+    {
+        if (raisedObject && height != 0)
+            raisedObject.transform.position =  new Vector3(raisedObject.transform.position.x, height, raisedObject.transform.position.z);
+        // if (raisedObject2 && height2 != 0)
+        //     raisedObject2.transform.position =  new Vector3(transform.position.x, height, transform.position.z);
     }
 }

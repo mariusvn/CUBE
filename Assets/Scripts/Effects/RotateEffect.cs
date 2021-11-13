@@ -33,7 +33,7 @@ public class RotateEffect : MonoBehaviour
     {
         if (other.gameObject.CompareTag(targetTag))
         {
-            StartCoroutine(RotateGameObject(((float) rotation) * ((float) side), animationTime, other.transform.parent.gameObject));
+            StartCoroutine(RotateGameObject(((float) rotation) * ((float) side), animationTime, other.gameObject));
         }
     }
 

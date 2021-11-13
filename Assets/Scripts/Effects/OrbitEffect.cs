@@ -32,7 +32,7 @@ public class OrbitEffect : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(ExecuteOrbit(other.transform.parent.gameObject));
+        StartCoroutine(ExecuteOrbit(other.gameObject));
     }
 
     private IEnumerator ExecuteOrbit(GameObject target)
